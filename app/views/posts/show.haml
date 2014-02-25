@@ -5,3 +5,5 @@
     .date= time_ago_in_words(@post.created_at||Time.now)+" ago"
     .body= simple_format(@post.body)
 %p= link_to 'View all posts', url_for(:posts, :index)
+    .details
+      .author Posted by #{@post.account.email}
