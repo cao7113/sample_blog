@@ -15,6 +15,9 @@ source "http://ruby.taobao.org"
 gem 'rake'
 
 # Component requirements
+#gem 'padrino-warden'
+gem 'padrino-warden', github: 'jondot/padrino-warden'
+gem 'will_paginate', '~>3.0'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'sass'
 gem 'haml'
@@ -27,6 +30,10 @@ gem 'rack-test', :require => 'rack/test', :group => 'test'
 
 # Padrino Stable Gem
 gem 'padrino', '0.12.0'
+group :development do
+  gem 'pry'
+  gem 'pry-nav'
+end
 
 # Or Padrino Edge
 # gem 'padrino', :github => 'padrino/padrino-framework'

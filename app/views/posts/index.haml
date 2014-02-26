@@ -5,3 +5,5 @@
   =feed_tag(:atom, url(:posts, :index, format: :atom), title: 'ATOM')
 
 #posts= partial 'posts/post', collection: @posts
+
+!= will_paginate(@posts)

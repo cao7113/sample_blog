@@ -1,5 +1,23 @@
 module SampleBlog
   class App < Padrino::Application
+    register Padrino::Warden
+    Warden::Strategies.add(:password) do
+      def valid?
+        params['email'] || params['password']
+      end
+      def authenticate!
+        u = Account.authenticate(params['email'], params['password'])
+        u.nil? ? fail!("Could not log in") : success!(u)
+      end
+    end
+    Warden::Manager.serialize_into_session do |u|
+      u.id
+    end
+    Warden::Manager.serialize_from_session do |id|
+      Account.find(id)
+    end
+
+    register WillPaginate::Sinatra
     register SassInitializer
     use ActiveRecord::ConnectionAdapters::ConnectionManagement
     register Padrino::Rendering
@@ -9,7 +27,8 @@ module SampleBlog
     enable :sessions
 
     get '/' do
-      "Hi padrino!"
+      #"Hi padrino!"
+      redirect url(:posts, :index)
     end
 
     get :about, map: '/about_us' do

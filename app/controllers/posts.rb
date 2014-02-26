@@ -1,7 +1,7 @@
 SampleBlog::App.controllers :posts do
   
   get :index, provides: [:html, :rss, :atom] do
-    @posts = Post.all(order: 'created_at desc')
+    @posts = Post.order('created_at desc').paginate(page: params[:page]||1, per_page: 3)
     render 'posts/index'
   end
 
