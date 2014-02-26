@@ -1,5 +1,6 @@
 module SampleBlog
   class App < Padrino::Application
+
     register Padrino::Warden
     Warden::Strategies.add(:password) do
       def valid?
